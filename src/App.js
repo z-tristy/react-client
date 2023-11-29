@@ -1,15 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { AppProvider, Frame } from "@shopify/polaris";
+import logo from "./logo.svg"
+import en from '@shopify/polaris/locales/en.json';
+import { Editor } from "./views/Editor";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
+
+  const theme = {
+    logo: {
+      width: 120,
+      topBarSource: logo,
+      // url: '/users',
+      accessibilityLabel: 'Editor',
+      contextualSaveBarSource: logo,
+    },
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Choo Choo! This is an example of a create-react-app site running on Railway.4</p>
-        <a className="App-link" href="https://react.dev/learn" target="_blank" rel="noreferrer noopener">Learn React</a>
-      </header>
-    </div>
+    <AppProvider
+      i18n={en}
+      theme={theme}
+    >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={ <Editor /> }></Route>
+          </Routes>
+        </BrowserRouter>
+        
+    </AppProvider>
+
   );
 }
 
